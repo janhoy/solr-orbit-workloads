@@ -1,0 +1,9 @@
+{% with collection_name="geonames" %}
+{{ benchmark.collect(parts="../../common_operations/delete_collection.json") }},
+{% endwith %}
+{% with collection_name="geonames", configset_path="configsets/geonames" %}
+{{ benchmark.collect(parts="../../common_operations/create_collection.json") }},
+{% endwith %}
+{{ benchmark.collect(parts="../../common_operations/check_cluster_health.json") }},
+{{ benchmark.collect(parts="collection_append.json") }},
+{{ benchmark.collect(parts="../../common_operations/optimize.json") }}

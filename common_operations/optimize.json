@@ -1,0 +1,7 @@
+{
+  "operation": {
+    "operation-type": "optimize",
+    "max-segments": {{ max_segments | default(1) }},
+    "timeout": {{ optimize_timeout | default(600) }}
+  }
+}

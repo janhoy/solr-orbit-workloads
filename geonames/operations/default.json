@@ -1,0 +1,134 @@
+{
+    "name": "index-append",
+    "operation-type": "bulk-index",
+    "bulk-size": {{bulk_size | default(5000)}},
+    "ingest-percentage": {{ingest_percentage | default(100)}}
+  },
+  {
+    "name": "index-update",
+    "operation-type": "bulk-index",
+    "bulk-size": {{bulk_size | default(5000)}},
+    "ingest-percentage": {{ingest_percentage | default(100)}},
+    "conflicts": "{{conflicts | default('random')}}",
+    "on-conflict": "{{on_conflict | default('index')}}",
+    "conflict-probability": {{conflict_probability | default(25)}},
+    "recency": {{recency | default(0)}}
+  },
+  {
+    "name": "match-all",
+    "operation-type": "search",
+    "body": {
+      "query": "*:*"
+    }
+  },
+  {
+    "name": "term",
+    "operation-type": "search",
+    "body": {
+      "query": "country_code_raw:AT"
+    }
+  },
+  {
+    "name": "phrase",
+    "operation-type": "search",
+    "body": {
+      "query": "name:\"Sankt Georgen\""
+    }
+  },
+  {
+    "name": "country_facet_uncached",
+    "operation-type": "search",
+    "body": {
+      "query": "*:*",
+      "limit": 0,
+      "facet": {
+        "country_population": {
+          "type": "terms",
+          "field": "country_code_raw",
+          "facet": {
+            "sum_population": "sum(population)"
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "country_facet_cached",
+    "operation-type": "search",
+    "cache": true,
+    "body": {
+      "query": "*:*",
+      "limit": 0,
+      "facet": {
+        "country_population": {
+          "type": "terms",
+          "field": "country_code_raw",
+          "facet": {
+            "sum_population": "sum(population)"
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "large_terms",
+    "operation-type": "search",
+    "param-source": "pure-terms-query-source"
+  },
+  {
+    "name": "large_filtered_terms",
+    "operation-type": "search",
+    "param-source": "filtered-terms-query-source"
+  },
+  {
+    "name": "large_prohibited_terms",
+    "operation-type": "search",
+    "param-source": "prohibited-terms-query-source"
+  },
+  {
+    "name": "desc_sort_population",
+    "operation-type": "search",
+    "body": {
+      "query": "*:*",
+      "sort": "population desc"
+    }
+  },
+  {
+    "name": "asc_sort_population",
+    "operation-type": "search",
+    "body": {
+      "query": "*:*",
+      "sort": "population asc"
+    }
+  },
+  {
+    "name": "desc_sort_geonameid",
+    "operation-type": "search",
+    "body": {
+      "query": "*:*",
+      "sort": "geonameid desc"
+    }
+  },
+  {
+    "name": "asc_sort_geonameid",
+    "operation-type": "search",
+    "body": {
+      "query": "*:*",
+      "sort": "geonameid asc"
+    }
+  },
+  {
+    "name": "numeric-term-cardinality-facet-high",
+    "operation-type": "search",
+    "body": {
+      "query": "*:*",
+      "limit": 0,
+      "facet": {
+        "geonameids": {
+          "type": "terms",
+          "field": "geonameid",
+          "limit": 50000
+        }
+      }
+    }
+  }

@@ -1,0 +1,9 @@
+{
+  "operation": {
+    "operation-type": "create-collection",
+    "collection": "{{ collection_name }}",
+    "configset-path": "{{ configset_path | default(collection_name) }}",
+    "num-shards": {{ num_shards | default(1) }},
+    "replication-factor": {{ replication_factor | default(1) }}
+  }
+}

@@ -1,0 +1,36 @@
+{% import "benchmark.helpers" as benchmark with context %}
+{
+  "version": 2,
+  "description": "POIs from Geonames",
+  "collections": [
+    {
+      "name": "geonames",
+      "configset-path": "configsets/geonames"
+    }
+  ],
+  "corpora": [
+    {
+      "name": "geonames",
+      "base-url": "https://dbyiw3u3rf9yr.cloudfront.net/corpora/geonames",
+      "documents": [
+        {
+          {% if use_zstd %}
+          "source-file": "documents-2.json.zst",
+          "compressed-bytes": 289546908,
+          {% else %}
+          "source-file": "documents-2.json.bz2",
+          "compressed-bytes": 265208777,
+          {% endif %}
+          "document-count": 11396503,
+          "uncompressed-bytes": 3547613828
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {{ benchmark.collect(parts="operations/*.json") }}
+  ],
+  "test_procedures": [
+    {{ benchmark.collect(parts="test_procedures/*.json") }}
+  ]
+}

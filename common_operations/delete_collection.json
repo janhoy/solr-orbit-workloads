@@ -1,0 +1,8 @@
+{
+  "operation": {
+    "operation-type": "delete-collection",
+    "collection": "{{ collection_name }}",
+    "delete-configset": true,
+    "ignore-missing": true
+  }
+}
