@@ -4,7 +4,14 @@
 github:
   # Repository metadata
   description: "Default workload specifications for the Apache Solr Orbit macrobenchmarking framework"
-  homepage: https://apache.github.io/solr-orbit/
+  homepage: https://solr.apache.org/
+  labels:
+    - apache
+    - solr
+    - benchmark
+    - macrobenchmark
+    - search
+    - performanceK
 
   # Enable GitHub Issues; disable unused features
   features:
