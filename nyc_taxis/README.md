@@ -59,20 +59,20 @@ is needed.
 
 ```bash
 # Quick sanity-check against a local Solr cluster (reduced corpus, fewer iterations)
-solr-benchmark run \
+solr-orbit run \
   --pipeline=benchmark-only \
   --target-host=localhost:8983 \
   --workload=nyc_taxis \
   --test-mode
 
 # Full default benchmark (append-no-conflicts test procedure)
-solr-benchmark run \
+solr-orbit run \
   --pipeline=benchmark-only \
   --target-host=localhost:8983 \
   --workload=nyc_taxis
 
 # Provision Solr 9 via Docker and benchmark
-solr-benchmark run \
+solr-orbit run \
   --pipeline=docker \
   --distribution-version=9.10.1 \
   --workload=nyc_taxis
@@ -116,11 +116,11 @@ Pass parameters with `--workload-params`, either inline or via a JSON file:
 
 ```bash
 # Inline
-solr-benchmark run --workload=nyc_taxis \
+solr-orbit run --workload=nyc_taxis \
   --workload-params="bulk_indexing_clients:4,num_shards:2"
 
 # JSON file
-solr-benchmark run --workload=nyc_taxis \
+solr-orbit run --workload=nyc_taxis \
   --workload-params=/path/to/params.json
 ```
 

@@ -1,7 +1,7 @@
 # Contributor Guidelines
 
 This repository contains the default workload specifications for
-[Apache Solr Benchmark](https://github.com/janhoy/solr-benchmark).
+[Apache Solr Orbit](https://github.com/apache/solr-orbit).
 This document is a guide on best practices for contributing to this repository.
 
 ## Contents
@@ -28,7 +28,7 @@ This document is a guide on best practices for contributing to this repository.
 This repository uses major version branches named after the Solr major version number (e.g.
 `9`, `10`). The `main` branch is the default.
 
-When running a benchmark, `solr-benchmark` automatically selects the workload branch that
+When running a benchmark, `solr-orbit` automatically selects the workload branch that
 matches the Solr version being tested. For example, benchmarking a Solr 10.X.X cluster will
 use the `10` branch if it exists, falling back to `main` otherwise. To cherry-pick your
 workload changes to the right branch, base that on the major version of the cluster you intend
@@ -63,16 +63,16 @@ Before making a change, fork this repository and make the change on a feature br
 ## Test changes
 
 After making changes in your feature branch, test them locally and optionally via GitHub Actions
-integration tests in your forked `solr-benchmark` repository.
+integration tests in your forked `solr-orbit` repository.
 
 ### Testing changes locally
 
 1. Start a local Solr cluster to test against (standalone or SolrCloud).
-2. Run `solr-benchmark` pointing at your modified workload using `--workload-path` or
+2. Run `solr-orbit` pointing at your modified workload using `--workload-path` or
    `--workloads-repository`. Use `--test-mode` for a quick sanity-check run:
 
 ```bash
-solr-benchmark run \
+solr-orbit run \
   --pipeline=benchmark-only \
   --target-host=localhost:8983 \
   --workload-path=/path/to/your/fork/nyc_taxis \
@@ -84,24 +84,24 @@ solr-benchmark run \
 Additional tips:
 - `--test-mode` reduces the corpus size and iteration counts so the run finishes quickly.
 - To enforce a specific workloads branch from a remote repository, pass
-  `--workloads-repository=https://github.com/<YOUR USERNAME>/solr-benchmark-workloads` and
-  `--distribution-version=X.Y.Z` to pin `solr-benchmark` to the matching branch.
+  `--workloads-repository=https://github.com/<YOUR USERNAME>/solr-orbit-workloads` and
+  `--distribution-version=X.Y.Z` to pin `solr-orbit` to the matching branch.
 
 ### Testing changes with integration tests
 
 To catch regressions across the full suite, run integration tests from your forked
-`solr-benchmark` repository.
+`solr-orbit` repository.
 
 **One-time setup:**
 
-1. Fork [solr-benchmark](https://github.com/janhoy/solr-benchmark).
+1. Fork [solr-orbit](https://github.com/apache/solr-orbit).
 2. In your fork, create a branch called `test-forked-workloads` based off `main`.
 3. In that branch, update the integration test configuration to point at your forked workloads
    repository:
 
 ```ini
 [workloads]
-default.url = https://github.com/<YOUR GITHUB USERNAME>/solr-benchmark-workloads
+default.url = https://github.com/<YOUR GITHUB USERNAME>/solr-orbit-workloads
 ```
 
 4. Push that branch to your fork.
@@ -111,7 +111,7 @@ default.url = https://github.com/<YOUR GITHUB USERNAME>/solr-benchmark-workloads
 1. Cherry-pick your workload change(s) onto the relevant branches of your forked workloads
    repository.
 2. Push those branches.
-3. In your forked `solr-benchmark` repository, go to **GitHub Actions → Run Integration Tests**,
+3. In your forked `solr-orbit` repository, go to **GitHub Actions → Run Integration Tests**,
    select the `test-forked-workloads` branch, and click **Run workflow**.
 4. Verify that all tests pass.
 
@@ -130,7 +130,7 @@ Before opening a pull request, make sure you have addressed the following:
    behaviour, tag a subject-matter expert.
 
 Create a pull request from your fork to the
-[`main` branch of this repository](https://github.com/janhoy/solr-benchmark-workloads).
+[`main` branch of this repository](https://github.com/apache/solr-orbit-workloads).
 
 
 ## Reviewing pull-requests
@@ -160,7 +160,7 @@ included in the backport PR.
 
 ## Contributing a workload
 
-See the [Apache Solr Benchmark documentation site](https://janhoy.github.io/solr-benchmark/)
+See the [Apache Solr Orbit documentation site](https://apache.github.io/solr-orbit/)
 for the full workload specification reference, including operation types, Jinja2 templating,
 and test procedure format.
 
@@ -178,7 +178,7 @@ A new workload must provide:
 
 - `workload.json` — defining `collections`, `corpora`, `operations`, and `test_procedures`
 - `configsets/<name>/` — a valid Solr configset (`schema.xml` + `solrconfig.xml`). If no
-  configset is provided, Apache Solr Benchmark will attempt to auto-generate a basic schema
+  configset is provided, Apache Solr Orbit will attempt to auto-generate a basic schema
   from the document structure, but an explicit configset is strongly recommended for
   benchmarking accuracy.
 - `operations/default.json` — the named operations referenced by test procedures
@@ -200,10 +200,10 @@ Provide a detailed `README.md` that includes:
 - The workload parameters that can be used to customize the workload.
 - A list of default and available test procedures.
 - A sample of the console output produced after a successful test run.
-- The open-source licence that gives users and Apache Solr Benchmark permission to use the
+- The open-source licence that gives users and Apache Solr Orbit permission to use the
   dataset.
 
-For an example, see the [`nyc_taxis` README](https://github.com/janhoy/solr-benchmark-workloads/blob/main/nyc_taxis/README.md).
+For an example, see the [`nyc_taxis` README](https://github.com/apache/solr-orbit-workloads/blob/main/nyc_taxis/README.md).
 
 ### Testing a new workload
 
@@ -213,7 +213,7 @@ All test runs used to produce example output must target a live Apache Solr clus
    end-to-end pass:
 
    ```bash
-   solr-benchmark run \
+   solr-orbit run \
      --pipeline=benchmark-only \
      --target-host=localhost:8983 \
      --workload-path=/path/to/your/workload \
@@ -233,4 +233,4 @@ that other users can download them.
 
 For questions, reach out on the
 [dev@solr.apache.org](https://lists.apache.org/list.html?dev@solr.apache.org) mailing list or
-open a [GitHub issue](https://github.com/janhoy/solr-benchmark-workloads/issues).
+open a [GitHub issue](https://github.com/apache/solr-orbit-workloads/issues).

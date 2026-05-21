@@ -4,7 +4,7 @@ This file documents the test procedures available in the `nyc_taxis` workload.
 Run any procedure with:
 
 ```bash
-solr-benchmark run --workload=nyc_taxis --test-procedure=<name>
+solr-orbit run --workload=nyc_taxis --test-procedure=<name>
 ```
 
 ---
