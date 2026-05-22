@@ -11,7 +11,7 @@ github:
     - benchmark
     - macrobenchmark
     - search
-    - performanceK
+    - performance
 
   # Enable GitHub Issues; disable unused features
   features:
@@ -27,23 +27,33 @@ github:
     rebase: false
 
   # Auto-delete head branch after a PR is merged
-  delete_branch_on_merge: true
+  pull_requests:
+    del_branch_on_merge: true
 
-  # Branch protection for the default branch
-  protected_branches:
-    main:
-      required_pull_request_reviews:
-        dismiss_stale_reviews: true
-        require_last_push_approval: true
-        required_approving_review_count: 1
-      # Enforce linear history (no merge commits)
-      required_linear_history: true
-      # All PR comments must be resolved before merge
-      required_conversation_resolution: true
+  # Branch protection
+  rulesets:
+    - name: "Default Branch Protection"
+      type: branch
+      branches:
+        includes:
+          - "~DEFAULT_BRANCH"
+          - "release/*"
+          - "rel/*"
+          - "9"
+          - "10"
+          - "11"
+          - "12"
+          - "13"
+        excludes: []
+      bypass_teams:
+        - root
+      restrict_deletion: true
+      restrict_force_push: true
+
+  autolink_jira:
+    - SOLR
 
 notifications:
   commits: commits@solr.apache.org
   issues: issues@solr.apache.org
   pullrequests: issues@solr.apache.org
-  pullrequests_status: dev@solr.apache.org
-  pullrequests_comment: issues@solr.apache.org
