@@ -1,11 +1,11 @@
-Apache Solr Benchmark Workloads
---------------------------------
+Apache Solr Orbit Workloads
+---------------------------
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 This repository contains the default workload specifications for
-[Apache Solr Benchmark](https://github.com/janhoy/solr-benchmark),
+[Apache Solr Orbit](https://github.com/apache/solr-orbit),
 the macrobenchmarking framework for [Apache Solr](https://solr.apache.org/).
 
 You do not need to interact with this repository directly unless you want to inspect existing
@@ -15,20 +15,20 @@ workloads, run benchmarks with a custom workload, or contribute a new workload.
 
 Full documentation — including how to run workloads, workload structure, operation types,
 parameters, and how to write custom workloads — is available on the
-**[Apache Solr Benchmark documentation site](https://janhoy.github.io/solr-benchmark/)**.
+**[Apache Solr Orbit documentation site](https://apache.github.io/solr-orbit/)**.
 
 ## Quick start
 
 ```bash
 # Run the default nyc_taxis workload against a local Solr cluster
-solr-benchmark run \
+solr-orbit run \
   --pipeline=benchmark-only \
   --target-host=localhost:8983 \
   --workload=nyc_taxis \
   --test-mode
 
 # Or provision Solr via Docker and benchmark
-solr-benchmark run \
+solr-orbit run \
   --pipeline=docker \
   --distribution-version=9.10.1 \
   --workload=nyc_taxis \
@@ -50,8 +50,8 @@ and contribute a new workload.
 ## Getting help
 
 - Questions and discussion: [dev@solr.apache.org](https://lists.apache.org/list.html?dev@solr.apache.org)
-- Bug reports and feature requests: [GitHub Issues](https://github.com/janhoy/solr-benchmark-workloads/issues)
-- Benchmark tool documentation: [Apache Solr Benchmark docs](https://janhoy.github.io/solr-benchmark/)
+- Bug reports and feature requests: [GitHub Issues](https://github.com/apache/solr-orbit-workloads/issues)
+- Benchmark tool documentation: [Apache Solr Orbit docs](https://apache.github.io/solr-orbit/)
 
 ## Data hosting
 

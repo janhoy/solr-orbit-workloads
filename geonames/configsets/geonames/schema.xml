@@ -15,7 +15,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Geonames workload schema for Apache Solr Benchmark.
+  Geonames workload schema for Apache Solr Orbit.
   Field layout ported from the upstream Rally Tracks / OpenSearch Benchmark workload.
 -->
 <schema name="geonames" version="1.6">
